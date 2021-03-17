@@ -31,5 +31,6 @@ git frontend/yarn-error.log*
 
 !**.pyc
 *.pyc
+/*.pyc
 *.pyc
 .idea
