@@ -28,6 +28,9 @@ git frontend/yarn-error.log*
 /env 
 /venv
 
+backend/backend/base/__pycache__/
+backend/backend/base/__pycache__
+backend/backend/base/__pycache__/*
 
 !**.pyc
 *.pyc
