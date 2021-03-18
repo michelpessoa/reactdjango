@@ -29,11 +29,13 @@ git frontend/yarn-error.log*
 /venv
 
 backend/backend/base/__pycache__/
+/backend/backend/base/__pycache__/
 backend/backend/base/__pycache__
+/backend/backend/base/__pycache__/*
 backend/backend/base/__pycache__/*
 
 !**.pyc
 *.pyc
-/*.pyc
+**/*.pyc
 *.pyc
 .idea
