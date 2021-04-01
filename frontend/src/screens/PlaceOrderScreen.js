@@ -8,6 +8,15 @@ import CheckoutSteps from '../components/CheckoutSteps'
 function PlaceOrderScreen() {
     const cart = useSelector(state => state.cart)
 
+    cart.itemsPrice = cart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)
+    cart.shippingPrice = (cart.itemsPrice > 100 ? 0 : 10).toFixed(2)
+    cart.taxPrice = Number((0.082) * cart.itemsPrice).toFixed(2)
+
+    cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
+
+    const placeOrder = () => {
+        console.log('Place Order pushed')
+    }
 
     return (
         <div>
@@ -52,6 +61,10 @@ function PlaceOrderScreen() {
                                                 <Col>
                                                     <Link to={`/product/${item.product}`}>{item.name}</Link>
                                                 </Col>
+
+                                                <Col md={5}>
+                                                    {item.qty} X R${item.price} = R$ {(item.qty * item.price).toFixed(2)}
+                                                </Col>
                                             </Row>
                                         </ListGroup.Item>
                                     ))}                                    
@@ -64,7 +77,53 @@ function PlaceOrderScreen() {
                 </Col>
 
                 <Col md={4}>
-                    <Card>2</Card>
+                    <Card>
+                        <ListGroup variant='flush'>
+                            <ListGroup.Item>
+                                <h2>Order Summary</h2>
+                            </ListGroup.Item>
+
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col>Item:</Col>
+                                    <Col>R${cart.itemsPrice}</Col>
+                                </Row>
+                            </ListGroup.Item>
+
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col>Shipping:</Col>
+                                    <Col>R${cart.shippingPrice}</Col>
+                                </Row>
+                            </ListGroup.Item>
+
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col>Tax:</Col>
+                                    <Col>R${cart.taxPrice}</Col>
+                                </Row>
+                            </ListGroup.Item>
+
+
+                            <ListGroup.Item>
+                                <Row>
+                                    <Col>Total Price:</Col>
+                                    <Col>R${cart.totalPrice}</Col>
+                                </Row>
+                            </ListGroup.Item>
+
+                            <ListGroup.Item>
+                                <Button
+                                    type='button'
+                                    className='btn-block'
+                                    disabled={cart.cartItems.length === 0}
+                                    onClick={placeOrder}
+                                >
+                                    Place Order
+                                </Button>
+                            </ListGroup.Item>
+                        </ListGroup>
+                    </Card>
                 </Col>
             </Row>
             
