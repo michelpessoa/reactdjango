@@ -7,6 +7,8 @@ from .models import *
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'countInStock')
 admin.site.register(Review)
-admin.site.register(Order)
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('_id', 'createdAt', 'user')
 admin.site.register(OrderItem)
 admin.site.register(ShippingAddress)
